@@ -32,11 +32,11 @@ Then execute the following script to pull the image from Docker Hub and start do
 	./start.sh
 
 Other scripts:
-**docker-compose.yml** - configuration file
-**stop.sh** - stops the containers
-**shell.sh** - ssh to the box
-**user-startup-script.sh** - executes in the box on each ssh. Very useful for further tweaking.
+** docker-compose.yml** - configuration file
+** stop.sh** - stops the containers
+** shell.sh** - ssh to the box
+** user-startup-script.sh** - executes in the box on each ssh. Very useful for further tweaking.
 
-**If you need super user privileges in the box, execute: sudo su. No password needed.**
+** If you need super user privileges in the box, execute: sudo su. No password needed.**
 
 The **/image_scripts** directory contains files used to create the docker image.

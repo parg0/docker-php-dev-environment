@@ -32,7 +32,7 @@ Then execute the following script to pull the image from Docker Hub and start do
 	./start.sh
 
 
-####Other scripts:
+#### Other scripts:
 
 **docker-compose.yml** - configuration file
 

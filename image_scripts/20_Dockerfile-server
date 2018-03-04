@@ -1,0 +1,45 @@
+FROM baseimage
+Maintainer = "Gjoko Pargo/www.pargo.info"
+
+LABEL Description="Apache v2.4 and PHP v5.4 on top of CentOS 7 base image" \
+      Version=1.1
+
+# Expose Apache & MySql ports
+# Apache port is set to 8080 (also in httpd.conf) because this setup will work in parallel with legacy
+# php projects, hance PHP is v5.4. The host is eqiuped with nginx on port 80 serving PHP v7 and also 
+# working as a reverse proxy for this docker box.
+
+EXPOSE 8080
+EXPOSE 3306
+
+# Install HTTPD24 collection from SCL.
+RUN \
+  yum install -y centos-release-scl && \ 
+  yum install -y httpd24 httpd24-httpd-tools mod_ssl && \
+  yum clean all && rm -rf /tmp/yum*
+
+# Add original httpd24 httpd.conf but modifed to listen on 8080 and runing with UID/GID: developer 
+ADD /image_scripts/httpd.conf /etc/httpd/conf/httpd.conf
+
+#Symlink
+RUN mv /opt/rh/httpd24/root/etc/httpd/conf/httpd.conf /opt/rh/httpd24/root/etc/httpd/conf/httpd.conf.bk && \
+    ln -s /etc/httpd/conf/httpd.conf /opt/rh/httpd24/root/etc/httpd/conf/httpd.conf && \
+    rm -f /etc/httpd/conf.d/welcome.conf
+
+RUN yum install -y php php-mysql php-gd php-opcache php-mbstring php-pear && \
+    yum clean all && rm -rf /tmp/yum* 
+
+RUN \
+`# Clean YUM caches to minimise Docker image size... #` \
+ yum clean all && rm -rf /tmp/yum*
+
+WORKDIR /var/www
+
+# Simple startup script to avoid some issues observed with container restart.
+ADD /image_scripts/run-httpd.sh /usr/local/bin/run-httpd.sh
+RUN chmod -v +x /usr/local/bin/run-httpd.sh
+
+CMD ["sudo", "/usr/local/bin/run-httpd.sh"]
+
+
+

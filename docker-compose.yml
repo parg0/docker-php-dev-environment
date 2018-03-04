@@ -1,0 +1,20 @@
+version: '3'
+
+services: 
+  dev-apache-php:
+    image: parg0/php_dev_environment
+    container_name: dev_php
+    environment:
+      - LOCAL_USER_ID=${LOCAL_USER_ID}
+    volumes:
+      - ./user-startup-script.sh:/tmp/user-startup-script.sh
+      - ./www/logs:/var/log/httpd
+      - ./www/html:/var/www/html
+      - ./www/conf:/etc/httpd/conf.d
+    ports:
+      - "8080:8080"
+      - "3306:3306"
+    network_mode: host
+
+
+

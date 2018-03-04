@@ -1,0 +1,53 @@
+FROM centos:7
+Maintainer = "Gjoko Pargo/www.pargo.info"
+
+LABEL Description="Base image with gosu activated" \
+      Version=1.1
+
+RUN echo "%wheel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers
+
+RUN \
+  `# Install yum-utils (provides yum-config-manager) + some basic web-related tools...` \
+  yum update -y && \
+  yum install -y yum-utils \ 
+                 wget \
+                 patch \
+                 tar \
+                 bzip2 \
+                 unzip \
+                 openssh-clients \
+                 rsync \
+                 net-tools \
+                 nano \
+                 make \
+                 less  \
+                 openssl \
+                 sudo && \
+  yum clean all && rm -rf /tmp/yum*
+
+RUN \
+  `# Installing time service ` \
+  yum install -y ntp && \
+  mv /etc/localtime /etc/localtime.bk && \
+  ln -s /usr/share/zoneinfo/Europe/Skopje /etc/localtime 
+
+# Setup gosu for easier command execution
+RUN gpg --keyserver pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+    && curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.2/gosu-amd64" \
+    && curl -o /usr/local/bin/gosu.asc -SL "https://github.com/tianon/gosu/releases/download/1.2/gosu-amd64.asc" \
+    && gpg --verify /usr/local/bin/gosu.asc \
+    && rm /usr/local/bin/gosu.asc \
+    && rm -r /root/.gnupg/ \
+    && chmod +x /usr/local/bin/gosu
+
+ADD /user-startup-script.sh /tmp/
+RUN chmod 755 /tmp/user-startup-script.sh
+  
+COPY /image_scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+
+
+
+

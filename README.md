@@ -10,17 +10,17 @@ Docker box with Apache v2.4 and PHP v5.4 on CentOS v7 capable of:
 
 More info:
 
-###Description
+### Description
 
 Imagine an ideal development environment: an exact copy of your production setup. You can accomplish that by tweaking this Docker box. No more sudo on your host to be able to edit the code residing on Docker, no more Samba tweaks, no more permission and file ownership problems!
 Code on your host machine with your default user.
 Run the code in docker!
 
-###Original intended usage
+### Original intended usage
 Why PHP v5.4?
 Because this setup was created for working with legacy PHP projects in parallel with web server serving PHP v7. Apache is set to work on port 8080, so all you need to do is setup a reverse proxy on the host machine.
 
-##INSTALLATION
+## INSTALLATION
 Install docker and docker-compose
 
 Start the following script to add the current user to docker group

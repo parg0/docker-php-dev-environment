@@ -33,7 +33,9 @@ Then execute the following script to pull the image from Docker Hub and start do
 Once you execute ./start.sh for the first time three directories will be created:
 
 **./www/html ** - this is where your code goes
+
 **./www/logs** - Apache logs
+
 **./www/conf** - Put your virtual host configurations here
 
 #### Other scripts:

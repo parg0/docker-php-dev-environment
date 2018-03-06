@@ -10,7 +10,7 @@ Docker box with Apache v2.4 and PHP v5.4 on CentOS v7. Before you close the tab,
 - It can work in parallel with another web server on the host machine via reverse proxy, hence the port 8080. If you don't need this feature, change the port to 80.
 - Works with any php framework: Laravel, Drupal, CodeIgniter, Magento...
 
-More info:
+More info: [Tutorial home page](http://pargo.info/devops/docker/docker-php-development-environment/) 
 
 ### Description
 

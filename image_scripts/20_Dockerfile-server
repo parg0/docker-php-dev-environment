@@ -4,13 +4,13 @@ Maintainer = "Gjoko Pargo/www.pargo.info"
 LABEL Description="Apache v2.4 and PHP v5.4 on top of CentOS 7 base image" \
       Version=1.1
 
-# Expose Apache & MySql ports
+# Expose Apache & xDebug ports
 # Apache port is set to 8080 (also in httpd.conf) because this setup will work in parallel with legacy
 # php projects, hance PHP is v5.4. The host is eqiuped with nginx on port 80 serving PHP v7 and also 
 # working as a reverse proxy for this docker box.
 
 EXPOSE 8080
-EXPOSE 3306
+EXPOSE 9000
 
 # Install HTTPD24 collection from SCL.
 RUN \
@@ -26,7 +26,7 @@ RUN mv /opt/rh/httpd24/root/etc/httpd/conf/httpd.conf /opt/rh/httpd24/root/etc/h
     ln -s /etc/httpd/conf/httpd.conf /opt/rh/httpd24/root/etc/httpd/conf/httpd.conf && \
     rm -f /etc/httpd/conf.d/welcome.conf
 
-RUN yum install -y php php-mysql php-gd php-opcache php-mbstring php-pear && \
+RUN yum install -y php php-mysql php-gd php-opcache php-mbstring php-pear php-xdebug && \
     yum clean all && rm -rf /tmp/yum* 
 
 RUN \

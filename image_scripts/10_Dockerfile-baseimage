@@ -22,7 +22,8 @@ RUN \
                  make \
                  less  \
                  openssl \
-                 sudo && \
+                 sudo \
+                 xterm && \
   yum clean all && rm -rf /tmp/yum*
 
 RUN \

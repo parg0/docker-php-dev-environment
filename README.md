@@ -14,8 +14,8 @@ More info:
 
 ### Description
 
-The idea behind this project was to create an containerized copy of a production enviroment for the developers. This image is the first and probably the most important step in acomplishing that task. It lets the developers code on the host while seemlesly executing the code in docker while solving the issues with file ownership and permissions.
-No Samba/NFS tweaks are nececary to  both the host and docker box.
+The idea behind this project was to create an containerized copy of a production enviroment for the developers. This image is the first and probably the most important step in acomplishing that task. It lets the developers code on the host while seamlessly executing the code in docker while solving the issues with file ownership and permissions.
+No Samba/NFS tweaks are necessary on both the host and docker box.
 
 ## INSTALLATION
 Install docker and docker-compose

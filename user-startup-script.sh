@@ -9,4 +9,5 @@ echo -e "\e[92mThis line is printed from ./user_startup_script.sh upon entry in 
 echo -e "You can use that script to further tweak this setup"
 
 #resize the terminal window so the apps (nano, vim...) take the complete window, not just 80x25
-resize >> /dev/null
+#resize >> /dev/null
+
